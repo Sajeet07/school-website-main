@@ -18,23 +18,7 @@
 
 <body class="hold-transition login-page">
 
-  <?php
-  require('../connection/config.php');
 
-  if (isset($_POST['Login'])) {
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-
-    $sql = "SELECT * FROM  users WHERE `email`='$email' && `password`='$password'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    if ($result) {
-      session_start();
-      $_SESSION['name'] = $row['name'];
-      $_SESSION['email'] = $row['email'];
-      echo     header("location:dashboard.php");
-    }
-  } ?>
   <div class="login-box">
     <div class="login-logo">
       <a href="index2.html"><b>Admin</b>Panel</a>
@@ -44,7 +28,7 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="#" method="post">
+        <form action="loginprocess.php" method="post">
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="email" name="email">
             <div class="input-group-append">
