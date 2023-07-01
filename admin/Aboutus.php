@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
   $fileextension = strtolower($fileextension);
 
   if (isset($fileName)) {
-    $path = '../uploads/';
+    $path = '../assets/images/';
     if (!empty($fileName)) {
 
       $success = 1;

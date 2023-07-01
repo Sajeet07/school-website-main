@@ -63,12 +63,34 @@ require('inc/sidebar.php');
                       <td><?php echo $sn; ?></td>
                       <td>
                         <a name="" id="" class="btn btn-primary btn-xs" href="editaboutus.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
-                        <a name="" id="" class="btn btn-danger btn-xs" href="process/deleteaboutus.php?id=<?php echo $data['id']; ?>" role="button">Delete</a>
+                        <button type="button" class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $data['id'] ?>">
+                          <i class="fa fa-trash-o"></i>Delete
+                        </button>
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Delete About Us</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Are you sure you want to delete?</p>
+                              </div>
+                              <div class="modal-footer">
+                                <form id="deleteForm" action="process/deleteaboutus.php" method="POST">
+                                  <input type="hidden" id="id" name="id">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-danger">Yes</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                       <td><?php echo $data['year']; ?></td>
                       <td><?php echo $data['h1']; ?></td>
                       <td><?php echo $data['p']; ?></td>
-                      <td> <img src="../uploads/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
+                      <td> <img src="../assets/images/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
                     </tr>
                   <?php
                   }
@@ -84,6 +106,16 @@ require('inc/sidebar.php');
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
+  <script>
+    var deleteButtons = document.getElementsByClassName("deleteButton");
+    for (var i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener("click", function() {
+        var id = this.getAttribute("data-id");
+        document.getElementById("id").value = id;
+      });
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- /.content -->
 </div>
 

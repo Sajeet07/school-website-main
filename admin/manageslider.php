@@ -64,22 +64,15 @@ require('inc/sidebar.php');
 
                         <!-- Button trigger modal -->
 
-                        <button type="button" class="btn btn-danger btn-xs delete-buttons" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data['id'] ?>">
+                        <button type="button" class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteModal" data-sliderid="<?php echo $data['id'] ?>">
                           <i class="fa fa-trash-o"></i>Delete
                         </button>
-                        <script>
-                          $('.delete-buttons').on('click', function() {
-                            console.log("Clicked!");
-                            var id = $(this).data('id');
-                            $('#confirmDelete').attr('href', 'process/deleteslider.php?id=' + id);
-                          });
 
 
-                          // Get the ID value when the delete button is clicked
-                        </script>
+
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- <div class=" modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -98,7 +91,30 @@ require('inc/sidebar.php');
                               </div>
                             </div>
                           </div>
+                        </div> -->
+
+
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Delete Slider</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Are you sure you want to delete?</p>
+                              </div>
+                              <div class="modal-footer">
+                                <form id="deleteForm" action="process/deleteslider.php" method="POST">
+                                  <input type="hidden" id="sliderIdInput" name="sliderid">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-danger">Yes</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+
                       </td>
 
                       <td><?php echo $data['name']; ?></td>
@@ -120,6 +136,29 @@ require('inc/sidebar.php');
   </section>
   <!-- /.content -->
 </div>
+<!-- <script>
+  $('.delete-buttons').on('click', function() {
+    console.log("Clicked!");
+    var id = $(this).data('id');
+    $('#confirmDelete').attr('href', 'process/deleteslider.php?id=' + id);
+  });
+
+
+  // Get the ID value when the delete button is clicked
+</script> -->
+
+<!-- Added Part -->
+<script>
+  var deleteButtons = document.getElementsByClassName("deleteButton");
+  for (var i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener("click", function() {
+      var sliderId = this.getAttribute("data-sliderid");
+      document.getElementById("sliderIdInput").value = sliderId;
+    });
+  }
+</script>
+
+<!-- Till Here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <?php

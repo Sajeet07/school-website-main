@@ -2,9 +2,8 @@
 /*delete click garda data table bata file ko id leara janxa then id leara gayesi tyo file ko name find garxam ani sabai file haru 
 uploads mah hunxa ani tyo upload ma vako  file  lai delete gardini plus database ma vako record lai pani delete gardinxa*/
     require('../../connection/config.php');
-    if(isset($_GET['id']))
-    {
-        $id = $_GET['id'];
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $id = $_POST['id'];
         $select_query = "SELECT * FROM filemanager WHERE id = $id";
         $select_result = mysqli_query($conn,$select_query);
         $select_row = $select_result->fetch_assoc();
@@ -23,4 +22,3 @@ uploads mah hunxa ani tyo upload ma vako  file  lai delete gardini plus database
             echo header('Location: ../managefile.php?msg=derror');
         }
     }
-?>

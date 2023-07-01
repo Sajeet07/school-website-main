@@ -36,7 +36,7 @@ require('inc/sidebar.php');
         <div class="col-md-12">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Manage admin</h3>
+              <h3 class="card-title">Manage Students</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,46 +44,43 @@ require('inc/sidebar.php');
                 <thead>
                   <tr>
                     <th>S.N.</th>
+                    <th>Action</th>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Password</th>
+                    <th>contact</th>
+                    <th>Class</th>
+                    <th>img</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $query = "SELECT * FROM users ORDER BY created_at DESC";
+                  $query = "SELECT * FROM students ORDER BY created_at DESC";
                   $result = mysqli_query($conn, $query);
                   $sn = 0;
                   while ($data = mysqli_fetch_array($result)) {
                     $sn += 1; //$sn = $sn+1
                   ?>
                     <tr>
+                      <td><?php echo $sn; ?></td>
                       <td>
-                        <?php echo $sn; ?></td>
-                      <td><?php echo $data['name']; ?></td>
-                      <td><?php echo $data['email']; ?></td>
-                      <td><?php echo $data['phone']; ?></td>
-                      <td><?php echo $data['password']; ?></td>
-                      <td>
-                        <a name="" id="" class="btn btn-primary btn-sm" href="editadmin.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
-
-                        <button type="button" class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteModal" data-adminid="<?php echo $data['id'] ?>">
+                        <a name="" id="" class="btn btn-primary btn-xs" href="editstudent.php?id=<?php echo $data['id']; ?>" role="button">Edit</a>
+                        <button type="button" class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $data['id'] ?>">
                           <i class="fa fa-trash-o"></i>Delete
                         </button>
                         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Delete Admin</h5>
+                                <h5 class="modal-title" id="deleteModalLabel">Delete Students</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
                                 <p>Are you sure you want to delete?</p>
                               </div>
                               <div class="modal-footer">
-                                <form id="deleteForm" action="process/deleteadmin.php" method="POST">
-                                  <input type="hidden" id="adminIdInput" name="adminid">
+                                <form id="deleteForm" action="process/deletestudent.php" method="POST">
+                                  <input type="hidden" id="id" name="id">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   <button type="submit" class="btn btn-danger">Yes</button>
                                 </form>
@@ -91,7 +88,12 @@ require('inc/sidebar.php');
                             </div>
                           </div>
                         </div>
-                      </td>
+                      <td><?php echo $data['name']; ?></td>
+                      <td><?php echo $data['gender']; ?></td>
+                      <td><?php echo $data['email']; ?></td>
+                      <td><?php echo $data['contact']; ?></td>
+                      <td><?php echo $data['class']; ?></td>
+                      <td> <img src="../uploads/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
                     </tr>
                   <?php
                   }
@@ -107,19 +109,18 @@ require('inc/sidebar.php');
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
+  <script>
+    var deleteButtons = document.getElementsByClassName("deleteButton");
+    for (var i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener("click", function() {
+        var id = this.getAttribute("data-id");
+        document.getElementById("id").value = id;
+      });
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- /.content -->
 </div>
-<script>
-  var deleteButtons = document.getElementsByClassName("deleteButton");
-  for (var i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener("click", function() {
-      var adminId = this.getAttribute("data-adminid");
-      document.getElementById("adminIdInput").value = adminId;
-    });
-  }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 
 <?php
 require('inc/footer.php');

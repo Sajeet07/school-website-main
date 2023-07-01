@@ -21,7 +21,7 @@
                     $year = $row['year'];
                     $h1 = $row['h1'];
                     $p = $row['p'];
-                    $img = $row['img'];
+                    $img = "assets/images/" . $row['img'];
 
                     // Output the content
                     echo "<h1 class='color-orange font-weight-bold about-title' data-aos='fade-up' data-aos-duration='1000'>$year</h1>";
@@ -38,7 +38,7 @@
                 <div class="about-img">
                     <div class="img_1" data-aos="zoom-in" data-aos-duration="550">
                         <div class="border-line"></div>
-                        <img src="uploads/<?php echo $img; ?>" class="img-fluid" alt="About">
+                        <img src="<?php echo $img; ?>" class="img-fluid" alt="About">
                     </div>
                     <div class="img_2 d-flex" data-aos="zoom-in" data-aos-duration="1000">
                         <h5 class="mb-0 text-white">Our Story</h5>
