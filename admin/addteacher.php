@@ -38,39 +38,50 @@ require('inc/sidebar.php');
 
                     <?php
                     require('../connection/config.php');
-                    if (isset($_POST['submit'])) {
-                        $fileName = $_FILES["Picture"]["name"];
-                        $tmp_name = $_FILES["Picture"]["tmp_name"];
 
-                        $position = strpos($fileName, ".");
-                        $fileextension = substr($fileName, $position + 1);
-                        $fileextension = strtolower($fileextension);
-
-                        if (isset($fileName)) {
-                            $path = '../uploads/';
-                            if (!empty($fileName)) {
-
-                                $success = 1;
-                                if (move_uploaded_file($tmp_name, $path . $fileName)) {
-                                    $name = $_POST["name"];
-                                    $gender = $_POST["gender"];
-                                    $contact = $_POST["contact"];
-                                    $email = $_POST["email"];
-                                    $address = $_POST["address"];
-                                    $qualification = $_POST["qualification"];
+                    // Check if the form is submitted
+                    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                        // Fetch the form data
+                        $name = $_POST["name"];
+                        $gender = $_POST["gender"];
+                        $contact = $_POST["contact"];
+                        $email = $_POST["email"];
+                        $address = $_POST["address"];
+                        $qualification = $_POST["qualification"];
+                        $img = $_FILES["img"]["name"];
 
 
+                        // Prepare the SQL statement
+                        $sql = "INSERT INTO teachers (name, gender, contact, email, address, qualification, img)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                        // Create a prepared statement
+                        $stmt = $conn->prepare($sql);
+
+                        // Bind the parameters with the form data
+                        $stmt->bind_param(
+                            "sssssss",
+                            $name,
+                            $gender,
+                            $contact,
+                            $email,
+                            $address,
+                            $qualification,
+                            $img,
+                        );
+
+                        if ($stmt->execute()) {
 
 
-                                    $sql = "INSERT INTO teachers(name, gender, contact, email, address, qualification, img)  VALUES('$name', '$gender', '$contact', '$email', '$address', '$qualification', '$fileName')";
-                                    $result = mysqli_query($conn, $sql);
-                                    if ($result) {
-                                        echo "Data added successfully";
-                                    }
-                                }
-                            }
+                            // header("Location:../index.php");
+                        } else {
+                            echo $stmt->error;
+                            /*  echo "Error: " . $sql . "<br>" . $conn->error; */
                         }
                     }
+
+                    // Close the database connection
+                    $conn->close();
                     ?>
                     <div class="card card-primary">
                         <div class="card-header">
@@ -86,7 +97,16 @@ require('inc/sidebar.php');
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Gender</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" name="gender" placeholder="">
+                                    <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="gender" placeholder=""> -->
+                                    <input type="radio" name="gender" value="male" id="male">
+                                    <label for="male">Male</label>
+
+                                    <input type="radio" name="gender" value="female" id="female">
+                                    <label for="female">Female</label>
+
+                                    <input type="radio" name="gender" value="other" id="other">
+                                    <label for="other">Other</label>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Contact</label>
@@ -106,7 +126,7 @@ require('inc/sidebar.php');
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Image</label>
-                                    <input type="file" class="form-control" id="exampleInputPassword1" name="Picture" placeholder="">
+                                    <input type="file" class="form-control" id="exampleInputPassword1" name="img" placeholder="">
                                 </div>
                             </div>
                             <!-- /.card-body -->

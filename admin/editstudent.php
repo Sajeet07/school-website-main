@@ -16,6 +16,8 @@ if (isset($_GET['id'])) {
     $email = $row['email'];
     $contact = $row['contact'];
     $class = $row['class'];
+    $f_name = $row['f_name'];
+    $m_name = $row['m_name'];
     $img = $row['img'];
 }
 ?>
@@ -56,11 +58,13 @@ if (isset($_GET['id'])) {
                         $email = $_POST['email'];
                         $contact = $_POST['contact'];
                         $class = $_POST['class'];
+                        $f_name = $_POST['f_name'];
+                        $m_name = $_POST['m_name'];
                         $img = $_POST['img'];
 
 
                         if ($name != "" && $gender != "" && $email != "" && $contact != "" && $class != "" && $img != "") {
-                            $query = "UPDATE students SET name='$name', gender='$gender', email='$email', contact='$contact', class='$class',img='$img' WHERE id=$id";
+                            $query = "UPDATE students SET name='$name', gender='$gender', email='$email', contact='$contact', class='$class',f_name='$f_name',m_name='$m_name', img='$img' WHERE id=$id";
                             $result = mysqli_query($conn, $query);
                             if ($result) {
                                 echo "Students is updated successfully.";
@@ -103,13 +107,21 @@ if (isset($_GET['id'])) {
                                     <input type="text" class="form-control" id="class" name="class" placeholder="" value="<?php echo $class; ?>">
                                 </div>
                                 <div class="form-group">
+                                    <label for="class">Father Name</label>
+                                    <input type="text" class="form-control" id="f_name" name="f_name" placeholder="" value="<?php echo $f_name; ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="class">Mother Name</label>
+                                    <input type="text" class="form-control" id="m_name" name="m_name" placeholder="" value="<?php echo $m_name; ?>">
+                                </div>
+                                <div class="form-group">
                                     <label for="img">Image Link</label>
-                                    <input type="text" class="form-control" id="img" name="img">
+                                    <input type="text" class="form-control" id="img" name="img" value="<?php echo $img; ?>">
                                 </div>
                             </div>
                             <!-- /.card-body -->
 
-                            <div class="card-footer">
+                            <div class=" card-footer">
                                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>

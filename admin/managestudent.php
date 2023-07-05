@@ -50,6 +50,8 @@ require('inc/sidebar.php');
                     <th>Email</th>
                     <th>contact</th>
                     <th>Class</th>
+                    <th>Father Name</th>
+                    <th>Mother Name</th>
                     <th>img</th>
                   </tr>
                 </thead>
@@ -93,7 +95,9 @@ require('inc/sidebar.php');
                       <td><?php echo $data['email']; ?></td>
                       <td><?php echo $data['contact']; ?></td>
                       <td><?php echo $data['class']; ?></td>
-                      <td> <img src="../uploads/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
+                      <td><?php echo $data['f_name']; ?></td>
+                      <td><?php echo $data['m_name']; ?></td>
+                      <td> <img src="../assets/images/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
                     </tr>
                   <?php
                   }

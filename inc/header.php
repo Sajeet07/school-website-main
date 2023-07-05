@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xl-7 col-lg-5 col-md-8">
                         <p class="marquee" style="color: #e9a846;"><span>
-                                Admission open for new intake of 2022.</span>
+                                Admission open for new intake of 2024.Apply Now</span>
                         </p>
                     </div>
                 </div>

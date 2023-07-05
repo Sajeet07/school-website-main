@@ -27,10 +27,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Prepare the SQL statement
     $sql = "INSERT INTO students (name, gender, dob, contact, email, class, img, f_name, f_profession, f_contact, m_name, m_profession, m_contact, address, province, district, doc_type, file_link, description)
-            VALUES ('$name', '$gender', '$dob', '$contact', '$email', '$class', '$img', '$f_name', '$f_profession', '$f_contact', '$m_name', '$m_profession', '$m_contact', '$address', '$province', '$district', '$doc_type', '$file_link', '$description')";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    if ($conn->query($sql) === TRUE) {
-        // File upload handling
+    // Create a prepared statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind the parameters with the form data
+    $stmt->bind_param(
+        "sssssssssssssssssss",
+        $name,
+        $gender,
+        $dob,
+        $contact,
+        $email,
+        $class,
+        $img,
+        $f_name,
+        $f_profession,
+        $f_contact,
+        $m_name,
+        $m_profession,
+        $m_contact,
+        $address,
+        $province,
+        $district,
+        $doc_type,
+        $file_link,
+        $description
+    );
+
+    if ($stmt->execute()) {
         $targetDir = "../uploads/"; // Directory where you want to store the uploaded files
         $targetimg = $targetDir . basename($img);
         $targetfile_link = $targetDir . basename($file_link);
@@ -39,9 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         move_uploaded_file($_FILES["img"]["tmp_name"], $targetimg);
         move_uploaded_file($_FILES["file_link"]["tmp_name"], $targetfile_link);
 
-        echo "Data inserted successfully.";
+        header("Location:../index.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo $stmt->error;
+        /*  echo "Error: " . $sql . "<br>" . $conn->error; */
     }
 }
 

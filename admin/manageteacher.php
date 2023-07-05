@@ -51,7 +51,7 @@ require('inc/sidebar.php');
                                         <th>contact</th>
                                         <th>Address</th>
                                         <th>Qualification</th>
-                                        <th>img</th>
+                                        <th>Profile Picture</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,7 +95,7 @@ require('inc/sidebar.php');
                                             <td><?php echo $data['contact']; ?></td>
                                             <td><?php echo $data['address']; ?></td>
                                             <td><?php echo $data['qualification']; ?></td>
-                                            <td> <img src="../uploads/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
+                                            <td> <img src="../assets/images/<?php echo $data['img']; ?>" alt="" height="80px;" width="80px;"></td>
                                         </tr>
                                     <?php
                                     }
