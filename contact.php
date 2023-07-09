@@ -1,8 +1,8 @@
 <?php require('inc/header.php'); ?>
 
 
-    <!-- start inner-banner -->
-    <section class="inner-banner">
+<!-- start inner-banner -->
+<section class="inner-banner">
     <h1 class="font-weight-bold text-center">Contact Us</h1>
 </section>
 <!-- end inner-banner -->
@@ -21,29 +21,29 @@
                 <div class="contact-form p-5" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="border-line"></div>
                     <h3 class="font-weight-bold color-orange">Drop Message</h3>
-                    <form method="post" action="process_contact.php">
-                        <div class="form-group">
+                    <form method="post" action="/phpmailer/send.php">
+                        <!--   <div class="form-group">
                             <label for="exampleInputName">Name</label>
                             <input class="form-control" id="exampleInputName" name="name" placeholder="Enter Name" type="text">
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email Address</label>
                             <input class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter Email" type="email">
                             <small class="form-text text-muted" id="emailHelp">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputNumber">Phone Number</label>
-                            <input class="form-control" id="exampleInputNumber" name="phone" placeholder="Enter Number" type="text">
+                            <label for="exampleInputNumber">Subject</label>
+                            <input class="form-control" id="exampleInputNumber" name="subject" placeholder="Enter Subject" type="text">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputMessage">Message</label>
                             <textarea class="form-control" name="message" id="exampleInputMessage" rows="3" placeholder="Message"></textarea>
                         </div>
-                        <div class="form-check">
+                        <!-- <div class="form-check">
                             <input class="form-check-input" id="exampleCheck1" name="checkbox" type="checkbox">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button class="btn theme-orange border-0 mt-4" type="submit">Send Message</button>
+                        </div> -->
+                        <button class="btn theme-orange border-0 mt-4" name="send" type="submit">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -73,71 +73,12 @@
         </div>
     </div>
 </section>
-zX 
-    <!-- end contact -->
-    <!-- start map -->
-    <section class="map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3516.0232142751133!2d83.97410201507309!3d28.20660728258775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399595aa38889db1%3A0xf35a851e0c6a4f34!2sLA%20GRANDEE%20International%20College!5e0!3m2!1sen!2snp!4v1682247462248!5m2!1sen!2snp" class="w-100 border-0" height="450"   allowfullscreen=""></iframe>
-    </section>
-    <!-- end map -->
-    <!-- start footer -->
-    <?php require('inc/footer.php'); ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+zX
+<!-- end contact -->
+<!-- start map -->
+<section class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3516.0232142751133!2d83.97410201507309!3d28.20660728258775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399595aa38889db1%3A0xf35a851e0c6a4f34!2sLA%20GRANDEE%20International%20College!5e0!3m2!1sen!2snp!4v1682247462248!5m2!1sen!2snp" class="w-100 border-0" height="450" allowfullscreen=""></iframe>
+</section>
+<!-- end map -->
+<!-- start footer -->
+<?php require('inc/footer.php'); ?>
