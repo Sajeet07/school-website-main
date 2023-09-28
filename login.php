@@ -276,11 +276,23 @@
     });
 
     // Form submission
+    // Form submission
     const enrollmentForm = document.getElementById('enrollment-form');
 
     enrollmentForm.addEventListener('submit', function(event) {
         event.preventDefault();
         // Perform form submission handling here
         // You can use AJAX or any other method to send form data to the server
+
+        // Assuming the form submission was successful
+        // You can replace this with your actual success condition
+        const isSubmissionSuccessful = true;
+
+        if (isSubmissionSuccessful) {
+            // Display a success message
+            alert('Your form has been submitted successfully');
+        }
     });
+
+    ;
 </script>
